@@ -58,6 +58,8 @@ def top5_countries_by_date(day: int, month: int, year: int = 2020) -> List[str]:
 
 
 def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
+  
+    from datetime import datetime, timedelta
     """
     Returns the number of countries/regions where the infection count in a given day was the same as the previous day.
 
