@@ -81,5 +81,4 @@ def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
       return str(data.month)+"/"+str(data.day)+"/"+str(data.year)[2:]
     giv = zamien(given_day)
     prev = zamien(previous_day)
-
     return int(confirmed_cases[confirmed_cases[giv]>confirmed_cases[prev]][giv].count())
