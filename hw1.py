@@ -50,8 +50,11 @@ def top5_countries_by_date(day: int, month: int, year: int = 2020) -> List[str]:
     :return: A list of strings with the names of the coutires
     """
 
-    # Your code goes here (remove pass)
-    pass
+    rok = str(year)
+    rok = rok[2:]
+    data = str(month)+"/"+str(day)+"/"+rok
+    cases_formated = confirmed_cases.groupby(["Country/Region"]).max()
+    return list(cases_formated.sort_values(by=data, ascending=False).head(5).index)
 
 
 def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
@@ -70,5 +73,11 @@ def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
     :return: Number of countries/regions where the count has not changed in a day
     """
     
-    # Your code goes here (remove pass)
-    pass
+    given_day = datetime(year, month, day)
+    previous_day = given_day - timedelta(days=1)
+    def zamien(data):
+      return str(data.month)+"/"+str(data.day)+"/"+str(data.year)[2:]
+    giv = zamien(given_day)
+    prev = zamien(previous_day)
+
+    return confirmed_cases[confirmed_cases[giv]>confirmed_cases[prev]][giv].count()
