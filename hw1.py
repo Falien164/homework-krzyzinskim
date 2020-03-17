@@ -31,7 +31,7 @@ def poland_cases_by_date(day: int, month: int, year: int = 2020) -> int:
     rok = str(year)
     rok = rok[2:]
     data = str(month)+"/"+str(day)+"/"+rok
-    return Poland[data].values[0]
+    return int(Poland[data].values[0])
 
 
 def top5_countries_by_date(day: int, month: int, year: int = 2020) -> List[str]:
@@ -57,9 +57,9 @@ def top5_countries_by_date(day: int, month: int, year: int = 2020) -> List[str]:
     return list(cases_formated.sort_values(by=data, ascending=False).head(5).index)
 
 
-def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
+from datetime import datetime, timedelta  
   
-    from datetime import datetime, timedelta
+def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
     """
     Returns the number of countries/regions where the infection count in a given day was the same as the previous day.
 
@@ -82,4 +82,4 @@ def no_new_cases_count(day: int, month: int, year: int = 2020) -> int:
     giv = zamien(given_day)
     prev = zamien(previous_day)
 
-    return confirmed_cases[confirmed_cases[giv]>confirmed_cases[prev]][giv].count()
+    return int(confirmed_cases[confirmed_cases[giv]>confirmed_cases[prev]][giv].count())
